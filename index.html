@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VTuber over MOQT</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>VTuber over Media over QUIC</h1>
+        <p>MOQTを使ったブラウザ完結VTuber配信デモ</p>
+      </header>
+      <main>
+        <section class="panel">
+          <h2>配信 (Publisher)</h2>
+          <div class="controls">
+            <label>
+              MOQT Relay URL
+              <input id="publisher-url" type="text" value="wss://relay.example.com/moqt" />
+            </label>
+            <label>
+              解像度
+              <select id="publisher-resolution">
+                <option value="1280x720" selected>1280x720 @ 60fps</option>
+                <option value="1920x1080">1920x1080 @ 60fps</option>
+                <option value="640x360">640x360 @ 30fps</option>
+              </select>
+            </label>
+            <label>
+              ビットレート (kbps)
+              <input id="publisher-bitrate" type="number" min="500" value="2000" />
+            </label>
+            <label>
+              コーデック
+              <select id="publisher-codec">
+                <option value="vp8" selected>VP8</option>
+                <option value="h264">H.264</option>
+                <option value="av1">AV1</option>
+              </select>
+            </label>
+            <label>
+              VRMモデル読み込み (OPFSキャッシュ)
+              <input id="publisher-vrm" type="file" accept=".vrm" />
+            </label>
+            <div class="button-row">
+              <button id="publisher-start">配信開始</button>
+              <button id="publisher-stop" disabled>停止</button>
+            </div>
+          </div>
+          <div class="viewport">
+            <canvas id="publisher-canvas"></canvas>
+            <video id="publisher-preview" autoplay muted playsinline></video>
+          </div>
+          <p id="publisher-status" class="status">待機中</p>
+        </section>
+
+        <section class="panel">
+          <h2>視聴 (Subscriber)</h2>
+          <div class="controls">
+            <label>
+              MOQT Relay URL
+              <input id="subscriber-url" type="text" value="wss://relay.example.com/moqt" />
+            </label>
+            <label>
+              遅延表示
+              <input id="subscriber-latency" type="checkbox" checked />
+            </label>
+            <div class="button-row">
+              <button id="subscriber-start">視聴開始</button>
+              <button id="subscriber-stop" disabled>停止</button>
+              <button id="subscriber-fullscreen">フルスクリーン</button>
+            </div>
+          </div>
+          <div class="viewport">
+            <canvas id="subscriber-canvas"></canvas>
+            <video id="subscriber-video" autoplay muted playsinline></video>
+          </div>
+          <p id="subscriber-status" class="status">待機中</p>
+          <p id="subscriber-latency-value" class="latency"></p>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
