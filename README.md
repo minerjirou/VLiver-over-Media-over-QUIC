@@ -1,3 +1,7 @@
+# -VLiver-over-Media-over-QUIC
+時雨堂さんの下記のポストに触発されて、VibeCodingで作ってみました。  
+https://x.com/voluntas/status/2009807213326647307?s=20  
+
 # VTuber over Media over QUIC
 
 ブラウザのみでVTuber配信/視聴を実現するための、MOQTベースの実装スタブです。
@@ -37,3 +41,4 @@ Chromeで以下のフラグを有効化して起動してください。
 
 - MOQTリレーは別途用意してください。
 - MediaPipe のモデルは CDN から取得します。
+=======
