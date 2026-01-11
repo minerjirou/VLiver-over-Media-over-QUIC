@@ -8,6 +8,12 @@
 - **Chrome**: `--enable-features=EnableWebTransportDraft07` を付けて起動してください。
 - **MOQT Relay**: 別途リレーサーバーが必要です (URL を UI で指定)。
 - **VRMモデル**: 任意の `.vrm` ファイルを用意してください。
+# VLiver over Media over QUIC  
+
+時雨堂さんの下記のポストに触発されて、VibeCodingで作ってみました。  
+https://x.com/voluntas/status/2009807213326647307?s=20  
+
+ブラウザのみでVTuber配信/視聴を実現するための、MOQTベースの実装スタブです。
 
 ## セットアップ
 
@@ -28,6 +34,11 @@ pnpm dev
 3. `.vrm` ファイルを読み込み、**配信開始**を押す。
 4. **Subscriber** セクションで同じ Relay URL を入力して **視聴開始**。
 5. 必要に応じて **フルスクリーン** や **遅延表示** を切り替え。
+Chromeで以下のフラグを有効化して起動してください。
+
+```bash
+--enable-features=EnableWebTransportDraft07
+```
 
 ## 構成
 
@@ -42,3 +53,17 @@ pnpm dev
 
 - MediaPipe のモデルは CDN から取得します。
 - デモ用途のスタブ実装のため、エラーハンドリングや再接続は最小限です。
+- `src/publisher.ts`: 配信側ロジック (MediaPipe + VRM + MOQT)
+- `src/subscriber.ts`: 視聴側ロジック (MOQT + OrbitControls)
+- `src/opfs.ts`: VRMモデルのOPFSキャッシュ
+
+## 使い方
+
+1. Publisher セクションで MOQT Relay URL と配信設定を入力。
+2. VRMモデルを読み込み、配信開始を押す。
+3. Subscriber セクションで同じ Relay URL を入力して視聴開始。
+
+## 注意
+
+- MOQTリレーは別途用意してください。
+- MediaPipe のモデルは CDN から取得します。
